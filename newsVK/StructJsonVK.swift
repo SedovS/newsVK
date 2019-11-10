@@ -24,7 +24,7 @@ struct Items: Codable {
 
 struct Attachments: Codable {
     let type: String
-    let photo: Photo
+    let photo: Photo? //если гифка то поля photo нет
 }
 
 struct Photo: Codable {
