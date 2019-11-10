@@ -30,13 +30,18 @@ class AuthorizationViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         guard let title = webView.title, let url = webView.url else { return }
-        if title == "OAuth Blank" {
+        switch title {
+        case "OAuth Blank":
             if let token = getQueryStringAccessToken(url: url) {
                 UserDefaults.standard.set(token, forKey: "accessToken")
                 segue()
             } else {
                 request()
             }
+        case "Новости":
+            request()
+        default:
+            break
         }
     }
     
