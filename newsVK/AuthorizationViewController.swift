@@ -17,7 +17,14 @@ class AuthorizationViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
-        request()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        guard let _ = UserDefaults.standard.string(forKey: "accessToken") else {
+            request()
+            return
+        }
+        segue()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -26,7 +33,7 @@ class AuthorizationViewController: UIViewController, WKNavigationDelegate {
         if title == "OAuth Blank" {
             if let token = getQueryStringAccessToken(url: url) {
                 UserDefaults.standard.set(token, forKey: "accessToken")
-                self.performSegue(withIdentifier: "segueLoginVKtoNews", sender: .none)
+                segue()
             } else {
                 request()
             }
@@ -53,6 +60,10 @@ class AuthorizationViewController: UIViewController, WKNavigationDelegate {
         return url.queryItems?.first(where: { $0.name == param})?.value
     }
 
-    
+    //Переход к NewsTableVC
+    private func segue() {
+        self.performSegue(withIdentifier: "segueLoginVKtoNews", sender: .none)
+
+    }
 
 }
