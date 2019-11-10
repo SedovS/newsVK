@@ -29,10 +29,9 @@ class DetailsViewController: UIViewController {
         let contentView = UIView()
         let wightPhoto = news.width
         let heightPhoto = news.height
-      
-        let proportion = Double(wightPhoto) / Double(heightPhoto)
-        let width = Double(widthScrolView - 20)
-        var height = Double(width / proportion)
+        let proportion = CGFloat(wightPhoto) / CGFloat(heightPhoto)
+        let width = widthScrolView - 20
+        var height = width / proportion
       
         imageView.frame = CGRect(x: 10, y: 10, width: width, height: height)
         imageView.image = globaldictionaryCasheImege.object(forKey: news!.urlPhoto as NSString)
@@ -46,14 +45,14 @@ class DetailsViewController: UIViewController {
         textLabel.text = text
         textLabel.sizeToFit()
     
-        height += Double(textLabel.frame.height)
+        height += textLabel.frame.height
         height += 50
         
         contentView.addSubview(imageView)
         contentView.addSubview(textLabel)
         
-        scrolView.frame = CGRect(x: 0, y: 0, width: Double(widthScrolView), height: Double(heightScrolView))
-        contentView.frame = CGRect(x: 0, y: 0, width: Double(widthScrolView), height: height)
+        scrolView.frame = CGRect(x: 0, y: 0, width: widthScrolView, height: heightScrolView)
+        contentView.frame = CGRect(x: 0, y: 0, width: widthScrolView, height: height)
         
         scrolView.contentSize.height = contentView.frame.height
         scrolView.addSubview(contentView)
