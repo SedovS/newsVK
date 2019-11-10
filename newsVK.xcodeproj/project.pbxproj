@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1830608E2378379300FEE2DE /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1830608D2378379300FEE2DE /* NewsTableViewController.swift */; };
 		18306090237837AB00FEE2DE /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1830608F237837AB00FEE2DE /* NewsTableViewCell.swift */; };
+		183060922378588A00FEE2DE /* StructJsonVK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183060912378588A00FEE2DE /* StructJsonVK.swift */; };
 		18D5CA162377F7110080F31A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5CA152377F7110080F31A /* AppDelegate.swift */; };
 		18D5CA182377F7110080F31A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5CA172377F7110080F31A /* SceneDelegate.swift */; };
 		18D5CA1D2377F7110080F31A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D5CA1B2377F7110080F31A /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		1830608D2378379300FEE2DE /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		1830608F237837AB00FEE2DE /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		183060912378588A00FEE2DE /* StructJsonVK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructJsonVK.swift; sourceTree = "<group>"; };
 		18D5CA122377F7110080F31A /* newsVK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newsVK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D5CA152377F7110080F31A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18D5CA172377F7110080F31A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				18D5CA292377F7ED0080F31A /* AuthorizationViewController.swift */,
 				1830608D2378379300FEE2DE /* NewsTableViewController.swift */,
 				1830608F237837AB00FEE2DE /* NewsTableViewCell.swift */,
+				183060912378588A00FEE2DE /* StructJsonVK.swift */,
 				18D5CA202377F7130080F31A /* LaunchScreen.storyboard */,
 				18D5CA232377F7130080F31A /* Info.plist */,
 			);
@@ -147,6 +150,7 @@
 				1830608E2378379300FEE2DE /* NewsTableViewController.swift in Sources */,
 				18D5CA2A2377F7ED0080F31A /* AuthorizationViewController.swift in Sources */,
 				18306090237837AB00FEE2DE /* NewsTableViewCell.swift in Sources */,
+				183060922378588A00FEE2DE /* StructJsonVK.swift in Sources */,
 				18D5CA162377F7110080F31A /* AppDelegate.swift in Sources */,
 				18D5CA182377F7110080F31A /* SceneDelegate.swift in Sources */,
 			);

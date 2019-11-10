@@ -35,7 +35,7 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="zvR-Rm-pNS" id="zjD-dF-SoM"/>
-                        <segue destination="cZU-O2-Oel" kind="push" identifier="segueLoginVKtoNews" id="bph-dP-YbZ"/>
+                        <segue destination="cZU-O2-Oel" kind="modal" identifier="segueLoginVKtoNews" animates="NO" modalPresentationStyle="currentContext" id="bph-dP-YbZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -47,7 +47,7 @@
             <objects>
                 <tableViewController id="cZU-O2-Oel" customClass="NewsTableViewController" customModule="newsVK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S2u-mD-yvy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -72,8 +72,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="naewsLabel" destination="k14-O1-h1g" id="2kx-Uj-ZkH"/>
                                     <outlet property="newsImage" destination="k6U-k6-sSA" id="V9L-ZS-ctP"/>
+                                    <outlet property="newsLabel" destination="k14-O1-h1g" id="DyZ-Or-Dyw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
