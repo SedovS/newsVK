@@ -9,12 +9,16 @@
 import UIKit
 
 class News {
-    public let text: String
-    public let urlPhoto: String
+    let text: String
+    let urlPhoto: String
+    let width: Int
+    let height: Int
     
-    init(text: String, urlPhoto: String){
+    init(text: String, urlPhoto: String, width: Int, height: Int ){
         self.text = text
         self.urlPhoto = urlPhoto
+        self.width = width
+        self.height = height
     }
 }
 
