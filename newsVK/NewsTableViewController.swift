@@ -11,11 +11,13 @@ import UIKit
 class NewsTableViewController: UITableViewController {
 
     var loadingNews = false //грузятся ли новости
-    var count = 6
+    let parser = Parser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        parser.parsNews(tableView: self.tableView)
     }
+
 
     // MARK: - Table view data source
 
@@ -27,15 +29,19 @@ class NewsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         loadingNews = false
-        return count
+        return globalArrayNews.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsItem", for: indexPath) as! NewsTableViewCell
-        tableView.rowHeight = 180
+        tableView.rowHeight = 280
         
-        cell.newsLabel.text = "\(indexPath) count= \(count)"
+        cell.newsLabel.text = globalArrayNews[indexPath.row].text
+        if let image = globaldictionaryCasheImege.object(forKey: NSString(string: globalArrayNews[indexPath.row].urlPhoto)) {
+            cell.newsImage.image = image
+        }
+        
         return cell
     }
     
@@ -55,9 +61,8 @@ class NewsTableViewController: UITableViewController {
     
     private func beginBatchFetch() {
         loadingNews = true
-        count += 10
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        if globalArrayNews.count != 0 {
+            parser.parsNews(tableView: self.tableView)
         }
     }
     
