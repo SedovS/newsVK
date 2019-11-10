@@ -10,12 +10,21 @@ import UIKit
 
 class DetailsViewController: UIViewController {
 
+    var news: News!
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var textLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+         textLabel.text = news.text
+        imageView.image = globaldictionaryCasheImege.object(forKey: news!.urlPhoto as NSString)
+    }
 
     /*
     // MARK: - Navigation
