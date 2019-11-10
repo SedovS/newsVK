@@ -31,7 +31,7 @@ class Parser {
     
     public func parsNews(tableView: UITableView) -> Void {
         let url = getUrl()
-        
+        print(url)
         session.dataTask(with: url) { (data, response, error) in
             
             guard let data = data,
@@ -51,7 +51,7 @@ class Parser {
             
             do{
                 let structJsonVK = try decoder.decode(StructJsonVK.self, from: data)
-                self.conversionNews(structVK: structJsonVK)
+                self.conversionNews(structVK: structJsonVK, tableView: tableView)
                 UserDefaults.standard.set(structJsonVK.response.nextFrom, forKey: "nextFrom")
                 DispatchQueue.main.async {
                     tableView.reloadData()
@@ -60,29 +60,46 @@ class Parser {
                 print("parsNews() error parser do-catch -> \(error.localizedDescription)")
             }
         } .resume()
-        }
+    }
+    
+    func parsImage(tableView: UITableView, urlString : String) -> Void {
+        guard let url = URL(string: urlString) else {return}
+        var image = UIImage()
         
-    private func conversionNews(structVK: StructJsonVK) ->Void {
+        session.dataTask(with: url) { (data, response, error) in
+            guard let data = data, error == nil else {
+                print("parsImage() error", error ?? "Unknown error")
+                return
+            }
+            image = UIImage(data: data)!
+            globaldictionaryCasheImege.setObject(image, forKey: NSString(string: "\(url)"))
+            DispatchQueue.main.async {
+                tableView.reloadData()
+            }
+        } .resume()
+    }
+        
+    private func conversionNews(structVK: StructJsonVK, tableView: UITableView) -> Void {
  
         for item in structVK.response.items {
             guard let arrayAttachments = item.attachments else {
                 continue
             }
             var urlPhoto = ""
-            for attachment in arrayAttachments {
-                
-                guard let photo = attachment.photo else {
+            guard let photo = arrayAttachments[0].photo else {
+                break
+            }
+            for size in photo.sizes {
+                if size.type == "q" {
+                    urlPhoto = size.url
                     break
                 }
-                for size in photo.sizes {
-                    if size.type == "q" {
-                        urlPhoto = size.url
-                        break
-                    }
-                    urlPhoto = size.url
-                }
+                urlPhoto = size.url
             }
+            
+            parsImage(tableView: tableView, urlString: urlPhoto)
             globalArrayNews.append(News(text: item.text ?? "", urlPhoto: urlPhoto))
+            
         }        
     }
     
