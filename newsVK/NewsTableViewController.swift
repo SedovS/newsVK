@@ -10,33 +10,57 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
 
+    var loadingNews = false //грузятся ли новости
+    var count = 6
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        loadingNews = false
+        return count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newsItem", for: indexPath) as! NewsTableViewCell
+        tableView.rowHeight = 180
+        
+        cell.newsLabel.text = "\(indexPath) count= \(count)"
         return cell
     }
-    */
+    
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let contentHeight = scrollView.contentSize.height
+        let offsetY = scrollView.contentOffset.y
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            
+            if !loadingNews {
+                beginBatchFetch()
+            }
+        }
+    }
+    
+    private func beginBatchFetch() {
+        loadingNews = true
+        count += 10
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
