@@ -32,17 +32,12 @@ class NewsTableViewController: UITableViewController {
         return globalArrayNews.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsItem", for: indexPath) as! NewsTableViewCell
-        tableView.rowHeight = 280
+        let news = globalArrayNews[indexPath.row]
         
-        cell.newsLabel.text = globalArrayNews[indexPath.row].text
-        if let image = globaldictionaryCasheImege.object(forKey: NSString(string: globalArrayNews[indexPath.row].urlPhoto)) {
-            cell.newsImage.image = image
-        }
-        
-        return cell
+        return fillingCell(cell: cell, news: news)
     }
     
     //MARK: UITableViewDelegate
@@ -82,6 +77,32 @@ class NewsTableViewController: UITableViewController {
             parser.parsNews(tableView: self.tableView)
         }
     }
+    
+    private func fillingCell(cell: NewsTableViewCell, news: News) -> NewsTableViewCell {
+        
+        var height = sizeHeightPhotos(news: news)
+        height += cell.newsLabel.frame.height
+        tableView.rowHeight = height
+        
+        cell.newsLabel.text = news.text
+        
+        if let image = globaldictionaryCasheImege.object(forKey: NSString(string: news.urlPhoto)) {
+            cell.newsImage.image = image
+        }
+        
+        return cell
+    }
+    
+    private func sizeHeightPhotos(news: News) -> CGFloat {
+           
+           let wightPhoto = news.width
+           let heightPhoto = news.height
+           
+           let proportion = CGFloat(wightPhoto) / CGFloat(heightPhoto)
+           let width = view.frame.width - 10
+           
+           return width / proportion
+       }
     
 
 }
