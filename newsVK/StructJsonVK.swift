@@ -34,6 +34,6 @@ struct Photo: Codable {
 struct Sizes: Codable {
     let type: String
     let url: String
-    let wight: Int
+    let width: Int
     let height: Int
 }
