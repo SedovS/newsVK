@@ -17,8 +17,7 @@ class AuthorizationViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
-        startLoad()
-    
+        request()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -26,15 +25,16 @@ class AuthorizationViewController: UIViewController, WKNavigationDelegate {
         guard let title = webView.title, let url = webView.url else { return }
         if title == "OAuth Blank" {
             if let token = getQueryStringAccessToken(url: url) {
-                print("Token = ",token)
+                UserDefaults.standard.set(token, forKey: "accessToken")
+                self.performSegue(withIdentifier: "segueLoginVKtoNews", sender: .none)
             } else {
-                startLoad()
+                request()
             }
         }
     }
     
     //Запрос
-    private func startLoad() {
+    private func request() {
 
         if let url = URL(string: urlString) {
             let request = URLRequest(url: url)
