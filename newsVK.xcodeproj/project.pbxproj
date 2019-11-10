@@ -12,6 +12,7 @@
 		18D5CA1D2377F7110080F31A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D5CA1B2377F7110080F31A /* Main.storyboard */; };
 		18D5CA1F2377F7130080F31A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D5CA1E2377F7130080F31A /* Assets.xcassets */; };
 		18D5CA222377F7130080F31A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D5CA202377F7130080F31A /* LaunchScreen.storyboard */; };
+		18D5CA2A2377F7ED0080F31A /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5CA292377F7ED0080F31A /* AuthorizationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		18D5CA1E2377F7130080F31A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D5CA212377F7130080F31A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18D5CA232377F7130080F31A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D5CA292377F7ED0080F31A /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				18D5CA172377F7110080F31A /* SceneDelegate.swift */,
 				18D5CA1B2377F7110080F31A /* Main.storyboard */,
 				18D5CA1E2377F7130080F31A /* Assets.xcassets */,
+				18D5CA292377F7ED0080F31A /* AuthorizationViewController.swift */,
 				18D5CA202377F7130080F31A /* LaunchScreen.storyboard */,
 				18D5CA232377F7130080F31A /* Info.plist */,
 			);
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D5CA2A2377F7ED0080F31A /* AuthorizationViewController.swift in Sources */,
 				18D5CA162377F7110080F31A /* AppDelegate.swift in Sources */,
 				18D5CA182377F7110080F31A /* SceneDelegate.swift in Sources */,
 			);
