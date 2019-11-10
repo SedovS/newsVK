@@ -31,7 +31,6 @@ class Parser {
     
     public func parsNews(tableView: UITableView) -> Void {
         let url = getUrl()
-        print(url)
         session.dataTask(with: url) { (data, response, error) in
             
             guard let data = data,
@@ -86,19 +85,25 @@ class Parser {
                 continue
             }
             var urlPhoto = ""
+            var width = 0
+            var height = 0
             guard let photo = arrayAttachments[0].photo else {
                 break
             }
             for size in photo.sizes {
-                if size.type == "q" {
+                if size.type == "y" {
                     urlPhoto = size.url
+                    width = size.width
+                    height = size.height
                     break
                 }
                 urlPhoto = size.url
+                width = size.width
+                height = size.height
             }
             
             parsImage(tableView: tableView, urlString: urlPhoto)
-            globalArrayNews.append(News(text: item.text ?? "", urlPhoto: urlPhoto))
+            globalArrayNews.append(News(text: item.text ?? "", urlPhoto: urlPhoto, width: width, height: height))
             
         }        
     }
