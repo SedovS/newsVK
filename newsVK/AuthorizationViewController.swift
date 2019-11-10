@@ -9,24 +9,50 @@
 import UIKit
 import WebKit
 
-class AuthorizationViewController: UIViewController {
+class AuthorizationViewController: UIViewController, WKNavigationDelegate {
 
     @IBOutlet weak var webView: WKWebView!
+    let urlString = "https://oauth.vk.com/authorize?client_id=7201688&scope=wall,friends&redirect_uri=http://api.vkontakte.ru/blank.html&display=mobile&response_type=token&revoke=1"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        webView.navigationDelegate = self
+        startLoad()
+    
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
+        guard let title = webView.title, let url = webView.url else { return }
+        if title == "OAuth Blank" {
+            if let token = getQueryStringAccessToken(url: url) {
+                print("Token = ",token)
+            } else {
+                startLoad()
+            }
+        }
     }
-    */
+    
+    //Запрос
+    private func startLoad() {
+
+        if let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            webView.load(request)
+        }
+    }
+    
+    //Вынимаем компонент access_token из url
+    private func getQueryStringAccessToken(url: URL) -> String? {
+        
+        let param = "access_token"
+        let urlString = url.absoluteString
+        let urlReplace = urlString.replacingOccurrences(of: "#", with: "?")
+        
+        guard let url = URLComponents(string: urlReplace) else {return nil}
+        return url.queryItems?.first(where: { $0.name == param})?.value
+    }
+
+    
 
 }
