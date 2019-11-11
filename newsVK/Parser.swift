@@ -55,9 +55,13 @@ class Parser {
                 self.conversionNews(structVK: structJsonVK, tableView: tableView)
                 UserDefaults.standard.set(structJsonVK.response.nextFrom, forKey: "nextFrom")
                 DispatchQueue.main.async {
+                    tableView.separatorStyle = .singleLine
                     tableView.reloadData()
                 }
             } catch {
+                DispatchQueue.main.async {
+                    tableView.separatorStyle = .none
+                }
                 print("parsNews() error parser do-catch -> \(error.localizedDescription)")
             }
         } .resume()
@@ -90,7 +94,7 @@ class Parser {
             var width = 0
             var height = 0
             guard let photo = arrayAttachments[0].photo else {
-                break
+                continue
             }
             for size in photo.sizes {
                 if size.type == "y" {
