@@ -104,10 +104,18 @@ class Parser {
                 height = size.height
             }
             
-            parsImage(tableView: tableView, urlString: urlPhoto)
+            loadPhoto(tableView: tableView, urlString: urlPhoto)
             globalArrayNews.append(News(text: item.text ?? "", urlPhoto: urlPhoto, width: width, height: height))
             
         }        
+    }
+    
+    public func loadPhoto(tableView: UITableView, urlString: String) -> Void {
+        if (globaldictionaryCasheImege.object(forKey: NSString(string: urlString)) != nil) {
+            return
+        } else {
+            parsImage(tableView: tableView, urlString: urlString)
+        }
     }
     
 }
