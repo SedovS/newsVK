@@ -12,7 +12,7 @@ import UIKit
 class Parser {
     
     let session = URLSession.shared
-    //let urlString = "https://api.vk.com/method/newsfeed.get?count=1&start_from=&max_photos=1&access_token=9b53110f1ad14839f78e8ae7f7d8ee05b39d5a94f995d23ea7a9c5f1ddedd01bad931ffac092d4a1ed10c&v=5.103"
+    //let urlString = "https://api.vk.com/method/newsfeed.get?filters=post&count=10&start_from=221/5_-36338110_436573:1693208936&max_photos=1&access_token=6fef31ee2da6ea865faf721bde782157efc77f417d52cdb8f7f185370e4d01a158ebe122cd6b827c3b367&v=5.103"
     
      private func getUrl() -> URL {
         //https://api.vk.com/method/METHOD_NAME?PARAMETERS&access_token=ACCESS_TOKEN&v=VERSION
@@ -31,6 +31,8 @@ class Parser {
     
     public func parsNews(tableView: UITableView) -> Void {
         let url = getUrl()
+        //let url = URL(string: urlString)
+        
         session.dataTask(with: url) { (data, response, error) in
             
             guard let data = data,
