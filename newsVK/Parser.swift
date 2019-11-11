@@ -29,7 +29,7 @@ class Parser {
         
     }
     
-    public func parsNews(tableView: UITableView) -> Void {
+    public func parsNews(view: UIViewController, tableView: UITableView) -> Void {
         let url = getUrl()
         //let url = URL(string: urlString)
         
@@ -61,8 +61,10 @@ class Parser {
             } catch {
                 DispatchQueue.main.async {
                     tableView.separatorStyle = .none
+                    tableView.reloadData()
                 }
                 print("parsNews() error parser do-catch -> \(error.localizedDescription)")
+                self.parsErrorVK(data: data, view: view)
             }
         } .resume()
     }
@@ -119,6 +121,25 @@ class Parser {
             return
         } else {
             parsImage(tableView: tableView, urlString: urlString)
+        }
+    }
+    
+    private func parsErrorVK(data: Data, view: UIViewController) -> Void {
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        do{
+            let structErrorVK = try decoder.decode(StructJsonErrorVK.self, from: data)
+            print(structErrorVK.error.errorCode, structErrorVK.error.errorMsg)
+            if structErrorVK.error.errorCode == 5 {
+                UserDefaults.standard.set(nil, forKey: "accessToken")
+                DispatchQueue.main.async {
+                    view.dismiss(animated: true, completion: nil)
+                }
+            }
+        } catch {
+            print("parsErrorVK() error parser do-catch -> \(error.localizedDescription)")
         }
     }
     

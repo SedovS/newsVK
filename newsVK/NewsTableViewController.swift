@@ -15,7 +15,7 @@ class NewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        parser.parsNews(tableView: self.tableView)
+        parser.parsNews(view: self, tableView: self.tableView)
     }
 
 
@@ -78,7 +78,7 @@ class NewsTableViewController: UITableViewController {
     private func beginBatchFetch() {
         loadingNews = true
         if globalArrayNews.count != 0 {
-            parser.parsNews(tableView: self.tableView)
+            parser.parsNews(view: self, tableView: self.tableView)
         }
     }
     
