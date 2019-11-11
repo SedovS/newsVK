@@ -12,10 +12,14 @@ class NewsTableViewController: UITableViewController {
 
     var loadingNews = false //грузятся ли новости
     let parser = Parser()
+    let newsRefreshController = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         parser.parsNews(tableView: self.tableView)
+        newsRefreshController.attributedTitle = NSAttributedString(string: "Загрузка")
+        newsRefreshController.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        self.tableView.refreshControl = newsRefreshController
     }
 
 
@@ -33,8 +37,12 @@ class NewsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsItem", for: indexPath) as! NewsTableViewCell
+        
+        if globalArrayNews.count == 0 {
+                   return cell
+               }
+        
         let news = globalArrayNews[indexPath.row]
         
         return fillingCell(cell: cell, news: news)
@@ -106,5 +114,14 @@ class NewsTableViewController: UITableViewController {
            return width / proportion
        }
     
-
+    @objc func refresh(sender: UIRefreshControl) {
+        UserDefaults.standard.set(nil, forKey: "nextFrom")
+        globalArrayNews.removeAll()
+        globaldictionaryCasheImege.removeAllObjects()
+        parser.parsNews(tableView: self.tableView)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            sender.endRefreshing()
+        }
+    }
+    
 }
