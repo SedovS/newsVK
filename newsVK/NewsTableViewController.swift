@@ -12,14 +12,10 @@ class NewsTableViewController: UITableViewController {
 
     var loadingNews = false //грузятся ли новости
     let parser = Parser()
-    let newsRefreshController = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         parser.parsNews(tableView: self.tableView)
-        newsRefreshController.attributedTitle = NSAttributedString(string: "Загрузка")
-        newsRefreshController.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        self.tableView.refreshControl = newsRefreshController
     }
 
 
@@ -114,14 +110,5 @@ class NewsTableViewController: UITableViewController {
            return width / proportion
        }
     
-    @objc func refresh(sender: UIRefreshControl) {
-        UserDefaults.standard.set(nil, forKey: "nextFrom")
-        globalArrayNews.removeAll()
-        globaldictionaryCasheImege.removeAllObjects()
-        parser.parsNews(tableView: self.tableView)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            sender.endRefreshing()
-        }
-    }
     
 }
