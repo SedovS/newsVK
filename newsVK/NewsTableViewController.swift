@@ -88,6 +88,8 @@ class NewsTableViewController: UITableViewController {
         
         if let image = globaldictionaryCasheImege.object(forKey: NSString(string: news.urlPhoto)) {
             cell.newsImage.image = image
+        } else {
+            cell.newsImage.image = nil
         }
         
         return cell
